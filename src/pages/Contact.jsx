@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 import Reveal from '../components/Reveal'
 import Unverified from '../components/Unverified'
+import FindUsMap from '../components/FindUsMap'
 import { identity } from '../data/site'
 import { ArrowIcon } from '../components/BrandMark'
 import './Contact.css'
@@ -51,9 +52,8 @@ export default function Contact() {
               </li>
             </ul>
 
-            <div className="detail-meta" id="locations" style={{ marginTop: 28, scrollMarginTop: 90 }}>
-              <div className="dm-label">Head office</div>
-              {[identity.hq.line1, identity.hq.line2, identity.hq.line3].map((l) => <p key={l} style={{ margin: '0 0 4px', fontSize: 13.5, color: 'var(--ink-soft)' }}>{l}</p>)}
+            <div id="locations" style={{ marginTop: 28, scrollMarginTop: 90 }}>
+              <FindUsMap />
             </div>
           </Reveal>
 

@@ -118,15 +118,41 @@ export default function MegaNav({ onOpenSearch }) {
   )
 }
 
-// ---------- Desktop item with hover mega-panel ----------
+// ---------- Desktop item with DIRECTIONAL hover mega-panel ----------
+// The panel enters from the side of the cursor that crossed the trigger,
+// so the motion feels physically directional rather than always sliding up.
+
+const DIR_VECTORS = {
+  top:    { x: 0,  y: -14 },
+  bottom: { x: 0,  y: 14 },
+  left:   { x: -16, y: 0 },
+  right:  { x: 16,  y: 0 },
+}
+
+function readDir(e, el) {
+  const b = el.getBoundingClientRect()
+  const x = e.clientX - (b.left + b.width / 2)
+  const y = e.clientY - (b.top + b.height / 2)
+  // Strongest axis wins; diagonal resolved to the dominant axis.
+  if (Math.abs(x) > Math.abs(y)) return x > 0 ? 'right' : 'left'
+  return y > 0 ? 'bottom' : 'top'
+}
+
 function DesktopItem({ top, active }) {
   const [open, setOpen] = useState(false)
-  const openTimer = useRef(null)
   const closeTimer = useRef(null)
+  const triggerRef = useRef(null)
+  const dirRef = useRef('bottom')
+  const [from, setFrom] = useState('bottom')
 
-  const enter = () => { clearTimeout(closeTimer.current); setOpen(true) }
+  const setDir = (e) => {
+    if (triggerRef.current) dirRef.current = readDir(e, triggerRef.current)
+    setFrom(dirRef.current)
+  }
+  const enter = (e) => { setDir(e); clearTimeout(closeTimer.current); setOpen(true) }
   const leave = () => { closeTimer.current = setTimeout(() => setOpen(false), 120) }
 
+  const v = DIR_VECTORS[from] || DIR_VECTORS.bottom
   const topHref = top.label === 'Home' ? '/' : top.path
 
   return (
@@ -138,6 +164,7 @@ function DesktopItem({ top, active }) {
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) leave() }}
     >
       <Link
+        ref={triggerRef}
         to={topHref}
         className={`meganav-toplink ${active ? 'is-active' : ''}`}
         aria-current={active ? 'page' : undefined}
@@ -153,10 +180,10 @@ function DesktopItem({ top, active }) {
             role="menu"
             onMouseEnter={() => { clearTimeout(closeTimer.current) }}
             onMouseLeave={leave}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
+            initial={{ opacity: 0, x: v.x, y: v.y }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            exit={{ opacity: 0, x: v.x, y: v.y }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div className="mega-grid">
               <div className="mega-lede">
