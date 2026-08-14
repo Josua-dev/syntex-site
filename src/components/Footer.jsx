@@ -11,8 +11,7 @@ export default function Footer() {
         <div className="foot-grid">
           <div className="foot-brand">
             <a href="/" className="brand on-dark">
-              <span className="mark" />
-              <span className="brand-word">Syntex Technologies<small>(Pty) Ltd</small></span>
+              <img src="/img/syntex-logo.png" alt="Syntex Technologies (Pty) Ltd" className="brand-logo" />
             </a>
             <p>
               {identity.legal}, a Namibian ICT company incorporated in {identity.incorporated},

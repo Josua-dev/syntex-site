@@ -56,8 +56,7 @@ export default function MegaNav({ onOpenSearch }) {
       <header className={`meganav ${scrolled ? 'is-scrolled' : ''} ${shrunk ? 'is-shrunk' : ''}`}>
         <div className="wrap meganav-inner">
           <Link to="/" className="brand" aria-label="Syntex Technologies, home">
-            <span className="mark" />
-            <span className="brand-word">Syntex Technologies<small>(Pty) Ltd</small></span>
+            <img src="/img/syntex-logo.png" alt="Syntex Technologies (Pty) Ltd" className="brand-logo" />
           </Link>
 
           <div className="meganav-navigable">
