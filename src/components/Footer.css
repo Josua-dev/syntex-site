@@ -6,9 +6,9 @@ footer{ background: var(--navy); padding: 64px 0 28px; color: rgba(250,250,248,.
 .foot-brand .brand{ margin-bottom: 0; }
 .foot-brand .brand.on-dark{ display: flex; align-items: center; }
 .foot-brand .brand-logo{
-  height: 42px;
+  height: 48px;
   width: auto;
-  max-width: 220px;
+  max-width: 260px;
   display: block;
   object-fit: contain;
 }
