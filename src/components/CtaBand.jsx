@@ -8,7 +8,7 @@ export default function CtaBand({ heading = 'Have a systems problem to solve?', 
     <section className="cta-band">
       <div className="wrap">
         <Reveal className="cta-panel">
-          <PhotoBg overlay={0.88} />
+          <PhotoBg overlay={0.66} />
           <h2>{heading}</h2>
           <div className="cta-actions">
             <Link to={primary} className="btn btn-signal">

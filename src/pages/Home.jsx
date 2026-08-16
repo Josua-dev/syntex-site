@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <header className="hero" id="top">
-        <PhotoBg overlay={0.86} />
+        <PhotoBg overlay={0.62} />
         <div className="wrap hero-grid">
           <div>
             <span className="eyebrow">Namibian ICT Systems Integrator · Est. {identity.incorporated}</span>

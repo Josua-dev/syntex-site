@@ -12,7 +12,7 @@ const Crosshatch = () => (
 export default function PageHeader({ crumbs, eyebrow, title, lead }) {
   return (
     <header className="page-header">
-      <PhotoBg overlay={0.86} />
+      <PhotoBg overlay={0.62} />
       <Crosshatch />
       <div className="wrap">
         {crumbs && <Breadcrumbs items={crumbs} />}

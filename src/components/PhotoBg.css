@@ -17,7 +17,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center 40%;
-  filter: grayscale(35%) contrast(1.05);
+  filter: grayscale(18%) contrast(1.04);
   will-change: transform;
 }
 
