@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { identity } from '../data/site'
 import { nav } from '../data/nav'
+import PhotoBg from './PhotoBg'
 import './Footer.css'
 
 export default function Footer() {
   const year = 2026
   return (
     <footer>
+      <PhotoBg overlay={0.9} />
       <div className="wrap">
         <div className="foot-grid">
           <div className="foot-brand">

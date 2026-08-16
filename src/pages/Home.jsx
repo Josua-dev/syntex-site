@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import CtaBand from '../components/CtaBand'
+import PhotoBg from '../components/PhotoBg'
 import { ArrowIcon } from '../components/BrandMark'
-import { serviceAreas, partners, process, identity } from '../data/site'
+import { serviceAreas, partners, process, identity, vision } from '../data/site'
 import './Home.css'
 
 export default function Home() {
   return (
     <>
       <header className="hero" id="top">
+        <PhotoBg overlay={0.86} />
         <div className="wrap hero-grid">
           <div>
             <span className="eyebrow">Namibian ICT Systems Integrator · Est. {identity.incorporated}</span>
@@ -119,9 +121,13 @@ export default function Home() {
             <p>{identity.legal} applies the same operating values to every engagement, regardless of client size or sector.</p>
           </Reveal>
           <div className="values-grid reveal">
-            <div className="value-card"><span className="vnum">01</span><h3>Innovation</h3><p>We prioritise cutting-edge solutions that keep our clients ahead in a constantly evolving digital world.</p></div>
-            <div className="value-card"><span className="vnum">02</span><h3>Accountability</h3><p>We take responsibility for our work and hold ourselves to delivering on every commitment we make.</p></div>
-            <div className="value-card"><span className="vnum">03</span><h3>Consistency</h3><p>Our solutions and services are held to the same standard on every engagement, at any scale.</p></div>
+            {vision.values.map((v) => (
+              <div className="value-card" key={v.n}>
+                <span className="vnum">{v.n}</span>
+                <h3>{v.title}</h3>
+                <p>{v.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
