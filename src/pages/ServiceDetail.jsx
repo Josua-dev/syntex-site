@@ -53,7 +53,7 @@ export default function ServiceDetail() {
           <Reveal>
             <p className="lead-p">{service.intro}</p>
             <p className="dl">{service.body}</p>
-            <p className="dl">{service.intro} These systems are delivered as part of a wider engagement — scoped, built, and supported by the same accountable team, and procured from our technology partners when hardware is involved.</p>
+            <p className="dl">Delivered as part of a wider engagement — scoped, built, and supported by the same accountable team, and procured from our technology partners where hardware is involved.</p>
           </Reveal>
           <Reveal>
             <div className="detail-meta">

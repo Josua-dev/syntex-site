@@ -35,8 +35,8 @@ export const serviceAreas = [
     category: 'Security', categorySlug: 'security',
     navGroup: 'Security',
     url: '/services/access-control-biometrics',
-    intro: 'Access control software that integrates advanced security technologies with innovative networking capabilities.',
-    body: 'State-of-the-art access control software integrates advanced security technologies with innovative networking capabilities, built for full-featured security across a site or a portfolio of buildings.',
+    intro: 'Access control software for securing a single site or a portfolio of buildings.',
+    body: 'Access control software that ties doors, identity verification, and monitoring into one networked system, built to be administered across a single site or a portfolio of buildings.',
     keywords: ['access control', 'biometric', 'fingerprint', 'networking', 'site security'],
   },
   {

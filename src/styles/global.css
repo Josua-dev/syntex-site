@@ -47,8 +47,8 @@
   --ease-out: cubic-bezier(.22,.61,.36,1);
 
   /* type */
-  --f-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
-  --f-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --f-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --f-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --f-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
 
   /* nav dims */

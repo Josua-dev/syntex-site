@@ -91,7 +91,7 @@ export default function Home() {
               </g>
               <circle cx="280" cy="280" r="46" fill="#0F2436" stroke="#9E9991" strokeWidth="1.4" />
               <circle cx="280" cy="280" r="34" fill="none" stroke="rgba(237,237,235,.25)" strokeWidth="1" />
-              <text x="280" y="284" textAnchor="middle" fontFamily="Space Grotesk, sans-serif" fontSize="14" fontWeight="600" fill="#EDEDEB">SYNTEX</text>
+              <text x="280" y="284" textAnchor="middle" fontFamily="Source Serif 4, Georgia, serif" fontSize="14" fontWeight="600" fill="#EDEDEB">SYNTEX</text>
             </svg>
             <div className="diagram-caption">
               <span>SYS-CLARITY.001</span>
