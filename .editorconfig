@@ -1,0 +1,36 @@
+# .editorconfig
+# Consistency in whitespace and indentation across editors and IDEs
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+trim_end = true
+indent_style = spaces
+indent_size = 2
+charset = utf-8
+# Vue files
+*.vue
+script type="module" {
+  indentation = 2
+}
+# CSS, SCSS, SASS, LESS, STYL
+*.css {
+  indentation = 2
+}
+*.scss {
+  indentation = 2
+}
+*.sass {
+  indentation = 2
+}
+# JS, TS, JSON
+*.js, *.json, *.ts {
+  indentation = 2
+}
+# Images
+*.png, *.jpg, *.jpeg, *.gif, *.svg, *.webp {
+  no-newline = true
+}
