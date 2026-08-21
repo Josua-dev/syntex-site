@@ -1,2 +1,0 @@
-# SPA fallback: any route that isn't a real file serves index.html.
-/*    /index.html   200
