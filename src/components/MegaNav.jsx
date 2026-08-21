@@ -139,10 +139,36 @@ function readDir(e, el) {
 
 function DesktopItem({ top, active }) {
   const [open, setOpen] = useState(false)
+  const [x, setX] = useState(0) // horizontal offset so the panel stays inside the viewport
   const closeTimer = useRef(null)
   const triggerRef = useRef(null)
   const dirRef = useRef('bottom')
   const [from, setFrom] = useState('bottom')
+
+  // Center the panel under the trigger, but clamp it so it never runs off
+  // either side of the viewport. Re-measures on open and on resize.
+  const measure = () => {
+    const item = triggerRef.current && triggerRef.current.parentElement
+    if (!item) return
+    const r = item.getBoundingClientRect()
+    const vw = window.innerWidth
+    const panelW = Math.min(920, vw * 0.92) // mirrors .mega-panel width
+    const pad = 16
+    let x = -r.width / 2 // start centered under the trigger
+    const panelLeft = r.left + x
+    const panelRight = r.left + x + panelW
+    if (panelLeft < pad) x += pad - panelLeft
+    if (panelRight > vw - pad) x -= panelRight - (vw - pad)
+    setX(x)
+  }
+
+  useEffect(() => {
+    if (open) measure()
+  }, [open])
+  useEffect(() => {
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
 
   const setDir = (e) => {
     if (triggerRef.current) dirRef.current = readDir(e, triggerRef.current)
@@ -179,9 +205,9 @@ function DesktopItem({ top, active }) {
             role="menu"
             onMouseEnter={() => { clearTimeout(closeTimer.current) }}
             onMouseLeave={leave}
-            initial={{ opacity: 0, x: v.x, y: v.y }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            exit={{ opacity: 0, x: v.x, y: v.y }}
+            initial={{ opacity: 0, x: v.x + x, y: v.y }}
+            animate={{ opacity: 1, x: x, y: 0 }}
+            exit={{ opacity: 0, x: v.x + x, y: v.y }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             <div className="mega-grid">

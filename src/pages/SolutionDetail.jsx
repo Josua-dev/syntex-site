@@ -16,15 +16,15 @@ export default function SolutionDetail() {
         <PageHeader
           crumbs={[{ label: 'Solutions', path: '/solutions' }, { label: 'Solution' }]}
           eyebrow="Solution"
-          title="This solution page is still being drafted."
-          lead="The solution you followed isn't in the verified content set yet."
+          title="This solution page is part of the information architecture."
+          lead="This URL is part of the navigation and will be wired to full content once confirmed against official sources."
         />
         <section className="block">
           <div className="wrap">
             <Reveal>
               <Unverified
-                title={`Solution draft — "${slug}"`}
-                body="This URL is part of the navigation's information architecture, but doesn't yet resolve to a verified solution entry. It will be wired to full content once confirmed against official sources — nothing here has been invented."
+                title={`Solution — "${slug}"`}
+                body="This URL is part of the information architecture and will be wired to full content once confirmed against official sources. No content has been fabricated in the meantime."
               />
             </Reveal>
             <Reveal style={{ marginTop: 28 }}>

@@ -96,8 +96,9 @@
 .mega-panel{
   position: absolute;
   top: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  /* Horizontal centering/clamping is computed in JS (DesktopItem) and
+     delivered via framer-motion's `x`, which owns `transform`. */
   width: min(920px, 92vw);
   background: rgba(255,255,255,.96);
   border: 1px solid var(--line);
