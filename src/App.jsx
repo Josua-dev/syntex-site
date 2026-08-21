@@ -1,38 +1,48 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './Layout'
 
+// Home stays eager — it's the first paint for most visitors.
 import Home from './pages/Home'
-import About from './pages/About'
-import AboutStory from './pages/about/Story'
-import AboutVision from './pages/about/Vision'
-import AboutValues from './pages/about/Values'
-import AboutLeadership from './pages/about/Leadership'
-import AboutDepartments from './pages/about/Departments'
-import AboutTeam from './pages/about/Team'
-import AboutCareers from './pages/about/Careers'
 
-import Services from './pages/Services'
-import ServiceDetail from './pages/ServiceDetail'
-import Solutions from './pages/Solutions'
-import SolutionDetail from './pages/SolutionDetail'
-import Industries from './pages/Industries'
-import IndustryDetail from './pages/IndustryDetail'
-import Hardware from './pages/Hardware'
+// Everything else is route-split: visitors only download the page they asked for.
+const About = lazy(() => import('./pages/About'))
+const AboutStory = lazy(() => import('./pages/about/Story'))
+const AboutVision = lazy(() => import('./pages/about/Vision'))
+const AboutValues = lazy(() => import('./pages/about/Values'))
+const AboutLeadership = lazy(() => import('./pages/about/Leadership'))
+const AboutDepartments = lazy(() => import('./pages/about/Departments'))
+const AboutTeam = lazy(() => import('./pages/about/Team'))
+const AboutCareers = lazy(() => import('./pages/about/Careers'))
 
-import Projects from './pages/Projects'
-import ProjectDetail from './pages/ProjectDetail'
-import Insights from './pages/Insights'
-import InsightsNews from './pages/insights/News'
-import InsightsApproach from './pages/insights/Approach'
-import InsightsResources from './pages/insights/Resources'
-import InsightsCaseStudies from './pages/insights/CaseStudies'
-import Global from './pages/Global'
-import Contact from './pages/Contact'
+const Services = lazy(() => import('./pages/Services'))
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'))
+const Solutions = lazy(() => import('./pages/Solutions'))
+const SolutionDetail = lazy(() => import('./pages/SolutionDetail'))
+const Industries = lazy(() => import('./pages/Industries'))
+const IndustryDetail = lazy(() => import('./pages/IndustryDetail'))
+const Hardware = lazy(() => import('./pages/Hardware'))
 
-import NotFound from './pages/NotFound'
+const Projects = lazy(() => import('./pages/Projects'))
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
+const Insights = lazy(() => import('./pages/Insights'))
+const InsightsNews = lazy(() => import('./pages/insights/News'))
+const InsightsApproach = lazy(() => import('./pages/insights/Approach'))
+const InsightsResources = lazy(() => import('./pages/insights/Resources'))
+const InsightsCaseStudies = lazy(() => import('./pages/insights/CaseStudies'))
+const Global = lazy(() => import('./pages/Global'))
+const Contact = lazy(() => import('./pages/Contact'))
+
+const NotFound = lazy(() => import('./pages/NotFound'))
+
+// Minimal, layout-stable fallback — avoids a blank flash between chunks.
+function RouteFallback() {
+  return <div style={{ minHeight: '60vh' }} aria-hidden="true" />
+}
 
 export default function App() {
   return (
+    <Suspense fallback={<RouteFallback />}>
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
@@ -80,5 +90,6 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
+    </Suspense>
   )
 }

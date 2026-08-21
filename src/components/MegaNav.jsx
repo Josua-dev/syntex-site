@@ -56,7 +56,7 @@ export default function MegaNav({ onOpenSearch }) {
       <header className={`meganav ${scrolled ? 'is-scrolled' : ''} ${shrunk ? 'is-shrunk' : ''}`}>
         <div className="wrap meganav-inner">
           <Link to="/" className="brand" aria-label="Syntex Technologies, home">
-            <img src="/img/syntex-logo.png" alt="Syntex Technologies (Pty) Ltd" className="brand-logo" />
+            <img src="/img/syntex-logo.png" alt="Syntex Technologies (Pty) Ltd" className="brand-logo" width="241" height="82" />
           </Link>
 
           <div className="meganav-navigable">
@@ -235,14 +235,22 @@ function MobileItem({ top, index, onNavigate }) {
       <div className="mm-group-head">
         <Link to={(isHome ? '/' : top.path)} className="mm-group-link" onClick={onNavigate}>
           {top.label}
-          <span className="mm-arrow" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen((v) => !v) }}>
-            <ArrowIcon />
-          </span>
         </Link>
+        <button
+          type="button"
+          className="mm-arrow"
+          aria-expanded={open}
+          aria-controls={`mm-sub-${top.label}`}
+          aria-label={open ? `Collapse ${top.label} submenu` : `Expand ${top.label} submenu`}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <ArrowIcon />
+        </button>
       </div>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
+            id={`mm-sub-${top.label}`}
             className="mm-sub"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
