@@ -19,6 +19,6 @@
     "build": "vite build",
     "preview": "vite preview",
     "serve": "npx http-server dist -s -p 8000",
-    "start": "npm run build && npx http-server dist -s -p 8000"
+    "start": "npm run build && npx http-server dist -s -p 8000 & start http://localhost:8000"
   }
 }
