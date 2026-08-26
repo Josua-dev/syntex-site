@@ -1,39 +1,40 @@
-import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Layout from './Layout'
+'use client'
 
-// Home stays eager — it's the first paint for most visitors.
+import { lazy, Suspense, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './Layout';
+
 import Home from './pages/Home'
 
-// Everything else is route-split: visitors only download the page they asked for.
-const About = lazy(() => import('./pages/About'))
-const AboutStory = lazy(() => import('./pages/about/Story'))
-const AboutVision = lazy(() => import('./pages/about/Vision'))
-const AboutValues = lazy(() => import('./pages/about/Values'))
-const AboutLeadership = lazy(() => import('./pages/about/Leadership'))
-const AboutDepartments = lazy(() => import('./pages/about/Departments'))
-const AboutTeam = lazy(() => import('./pages/about/Team'))
-const AboutCareers = lazy(() => import('./pages/about/Careers'))
+import About from './pages/About'
+import AboutStory from './pages/about/Story'
+import AboutVision from './pages/about/Vision'
+import AboutValues from './pages/about/Values'
+import AboutLeadership from './pages/about/Leadership'
+import AboutDepartments from './pages/about/Departments'
+import AboutTeam from './pages/about/Team'
+import AboutCareers from './pages/about/Careers'
 
-const Services = lazy(() => import('./pages/Services'))
-const ServiceDetail = lazy(() => import('./pages/ServiceDetail'))
-const Solutions = lazy(() => import('./pages/Solutions'))
-const SolutionDetail = lazy(() => import('./pages/SolutionDetail'))
-const Industries = lazy(() => import('./pages/Industries'))
-const IndustryDetail = lazy(() => import('./pages/IndustryDetail'))
-const Hardware = lazy(() => import('./pages/Hardware'))
+import Services from './pages/Services'
+import ServiceDetail from './pages/ServiceDetail'
+import Solutions from './pages/Solutions'
+import SolutionDetail from './pages/SolutionDetail'
+import Industries from './pages/Industries'
+import IndustryDetail from './pages/IndustryDetail'
+import Hardware from './pages/Hardware'
 
-const Projects = lazy(() => import('./pages/Projects'))
-const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
-const Insights = lazy(() => import('./pages/Insights'))
-const InsightsNews = lazy(() => import('./pages/insights/News'))
-const InsightsApproach = lazy(() => import('./pages/insights/Approach'))
-const InsightsResources = lazy(() => import('./pages/insights/Resources'))
-const InsightsCaseStudies = lazy(() => import('./pages/insights/CaseStudies'))
-const Global = lazy(() => import('./pages/Global'))
-const Contact = lazy(() => import('./pages/Contact'))
+import Projects from './pages/Projects'
+import ProjectDetail from './pages/ProjectDetail'
+import Insights from './pages/Insights'
+import InsightsNews from './pages/insights/News'
+import InsightsApproach from './pages/insights/Approach'
+import InsightsResources from './pages/insights/Resources'
+import InsightsCaseStudies from './pages/insights/CaseStudies'
 
-const NotFound = lazy(() => import('./pages/NotFound'))
+import Global from './pages/Global'
+import Contact from './pages/Contact'
+
+import NotFound from './pages/NotFound'
 
 // Minimal, layout-stable fallback — avoids a blank flash between chunks.
 function RouteFallback() {
@@ -53,55 +54,67 @@ function RouteFallback() {
 }
 
 export default function App() {
+  // Animate .eyebrow elements on mount
+  useEffect(() => {
+    anime({
+      targets: '.eyebrow',
+      opacity: [0, 1],
+      translateY: [-20, 0],
+      duration: 600,
+      delay: (i) => i * 50,
+      ease: 'outQuad',
+    });
+  }, []);
+
   return (
     <Suspense fallback={<RouteFallback />}>
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
 
-        {/* About hub + sub-pages */}
-        <Route path="/about" element={<About />} />
-        <Route path="/about/story" element={<AboutStory />} />
-        <Route path="/about/vision-mission" element={<AboutVision />} />
-        <Route path="/about/values" element={<AboutValues />} />
-        <Route path="/about/leadership" element={<AboutLeadership />} />
-        <Route path="/about/departments" element={<AboutDepartments />} />
-        <Route path="/about/team" element={<AboutTeam />} />
-        <Route path="/about/careers" element={<AboutCareers />} />
+          {/* About hub + sub-pages */}
+          <Route path="/about" element={<About />} />
+          <Route path="/about/story" element={<AboutStory />} />
+          <Route path="/about/vision-mission" element={<AboutVision />} />
+          <Route path="/about/values" element={<AboutValues />} />
+          <Route path="/about/leadership" element={<AboutLeadership />} />
+          <Route path="/about/departments" element={<AboutDepartments />} />
+          <Route path="/about/team" element={<AboutTeam />} />
+          <Route path="/about/careers" element={<AboutCareers />} />
 
-        {/* Services */}
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/:slug" element={<ServiceDetail />} />
+          {/* Services */}
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
 
-        {/* Solutions */}
-        <Route path="/solutions" element={<Solutions />} />
-        <Route path="/solutions/:slug" element={<SolutionDetail />} />
+          {/* Solutions */}
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions/:slug" element={<SolutionDetail />} />
 
-        {/* Industries */}
-        <Route path="/industries" element={<Industries />} />
-        <Route path="/industries/:slug" element={<IndustryDetail />} />
+          {/* Industries */}
+          <Route path="/industries" element={<Industries />} />
+          <Route path="/industries/:slug" element={<IndustryDetail />} />
 
-        {/* Hardware */}
-        <Route path="/hardware" element={<Hardware />} />
+          {/* Hardware */}
+          <Route path="/hardware" element={<Hardware />} />
 
-        {/* Projects */}
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:slug" element={<ProjectDetail />} />
+          {/* Projects */}
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
 
-        {/* Insights */}
-        <Route path="/insights" element={<Insights />} />
-        <Route path="/insights/news" element={<InsightsNews />} />
-        <Route path="/insights/approach" element={<InsightsApproach />} />
-        <Route path="/insights/resources" element={<InsightsResources />} />
-        <Route path="/insights/case-studies" element={<InsightsCaseStudies />} />
+          {/* Insights */}
+          <Route path="/insights" element={<Insights />} />
+          <Route path="/insights/news" element={<InsightsNews />} />
+          <Route path="/insights/approach" element={<InsightsApproach />} />
+          <Route path="/insights/resources" element={<InsightsResources />} />
+          <Route path="/insights/case-studies" element={<InsightsCaseStudies />} />
 
-        {/* Global + Contact */}
-        <Route path="/global" element={<Global />} />
-        <Route path="/contact" element={<Contact />} />
+          {/* Global + Contact */}
+          <Route path="/global" element={<Global />} />
+          <Route path="/contact" element={<Contact />} />
 
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </Suspense>
   )
 }
