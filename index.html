@@ -24,6 +24,9 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Load React and ReactDOM globally before the app bundle to avoid "React is not defined" errors -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

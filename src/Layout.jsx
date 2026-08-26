@@ -1,3 +1,7 @@
+'use client'
+
+/* This layout uses client-side hooks (useState, useEffect, useLocation)
+   and framer-motion for animations, so it must be marked as a client component. */
 import { useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'

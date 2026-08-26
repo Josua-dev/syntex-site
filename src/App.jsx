@@ -37,7 +37,19 @@ const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Minimal, layout-stable fallback — avoids a blank flash between chunks.
 function RouteFallback() {
-  return <div style={{ minHeight: '60vh' }} aria-hidden="true" />
+  return (
+    <div style={{
+      minHeight: '60vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'var(--paper)',
+      color: 'var(--ink)',
+      fontFamily: 'var(--f-body)'
+    }}>
+      Loading...
+    </div>
+  );
 }
 
 export default function App() {
