@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <header className="hero" id="top">
-        <PhotoBg overlay={0.62} loading="lazy" aspectRatio="16/9" />
+        <PhotoBg overlay={0.62} />
         <div className="wrap hero-grid">
           <div>
             <span className="eyebrow">Namibian ICT Systems Integrator · Est. {identity.incorporated}</span>
@@ -27,7 +27,7 @@ export default function Home() {
                 Talk to Our Team <ArrowIcon />
               </Link>
             </div>
-            <div className="hero-facts" aria-hidden="true" role="presentation">
+            <div className="hero-facts">
               <div className="fact"><b>{identity.incorporated}</b><span>Incorporated in Namibia</span></div>
               <div className="fact"><b>Windhoek</b><span>Klein Windhoek head office</span></div>
               <div className="fact"><b>6</b><span>Core solution categories</span></div>
@@ -67,7 +67,7 @@ export default function Home() {
                   <circle cx="470" cy="320" r="5" fill="#EDEDEB" />
                   <circle cx="470" cy="320" r="10" stroke="#9E9991" strokeWidth="1" fill="none" opacity=".5" />
                 </g>
-                <text x="491" y="325" textAnchor="start">HR & PAYROLL</text>
+                <text x="491" y="325" textAnchor="start">HR &amp; PAYROLL</text>
                 <g className="node-pulse" style={{ animationDelay: '.8s' }}>
                   <circle cx="380" cy="450" r="5" fill="#EDEDEB" />
                   <circle cx="380" cy="450" r="10" stroke="#9E9991" strokeWidth="1" fill="none" opacity=".5" />
@@ -105,10 +105,10 @@ export default function Home() {
         <div className="wrap">
           <span className="label">Sectors We Serve</span>
           <ul className="sector-list">
-            <li>Government & Border Control</li>
-            <li>Municipalities & Utilities</li>
+            <li>Government &amp; Border Control</li>
+            <li>Municipalities &amp; Utilities</li>
             <li>Financial Services</li>
-            <li>Enterprise & Mid-Market</li>
+            <li>Enterprise &amp; Mid-Market</li>
           </ul>
         </div>
       </section>

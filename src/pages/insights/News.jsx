@@ -20,7 +20,6 @@ export default function News() {
             <Unverified
               title="News feed"
               body="No news items have been published in the verified source set yet. When official announcements appear, they'll be listed here with a publication date and a link back to the source. Nothing has been written that can't be traced to the public record."
-              verified={false}
             />
           </Reveal>
           <Reveal style={{ marginTop: 28 }}>

@@ -16,15 +16,15 @@ export default function ServiceDetail() {
         <PageHeader
           crumbs={[{ label: 'Services', path: '/services' }, { label: 'Service' }]}
           eyebrow="Service"
-          title="This service page is part of the information architecture."
-          lead="This URL is linked from the navigation but doesn't yet resolve to a verified service entry."
+          title="This service page is still being drafted."
+          lead="The service you followed isn't in the verified content set yet."
         />
         <section className="block">
           <div className="wrap">
             <Reveal>
               <Unverified
-                title={`Service — "${slug}"`}
-                body="This URL is part of the information architecture and will be wired to full content once confirmed against official sources. No content has been fabricated in the meantime."
+                title={`Service draft — "${slug}"`}
+                body="This URL isn't backed by a verified service entry yet. It's linked from the navigation as part of the information architecture, and will resolve to full content once it's confirmed against official sources. Nothing has been fabricated in the meantime."
               />
             </Reveal>
             <Reveal style={{ marginTop: 28 }}>

@@ -59,6 +59,7 @@ export default function Contact() {
 
           <Reveal>
             <div className="contact-form">
+              <div aria-live="polite">
               {sent ? (
                 <div className="form-success">
                   <h3>Thanks — we've received your message.</h3>
@@ -68,19 +69,20 @@ export default function Contact() {
               ) : (
                 <form onSubmit={(e) => { e.preventDefault(); setSent(true) }}>
                   <div className="f-grid">
-                    <label>Name<input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" /></label>
-                    <label>Organisation<input value={form.organization} onChange={(e) => setForm({ ...form, organization: e.target.value })} placeholder="Company or department" /></label>
+                    <label>Name<input name="name" autoComplete="name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" /></label>
+                    <label>Organisation<input name="organization" autoComplete="organization" value={form.organization} onChange={(e) => setForm({ ...form, organization: e.target.value })} placeholder="Company or department" /></label>
                   </div>
-                  <label>Email<input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@organisation.com" /></label>
+                  <label>Email<input type="email" name="email" autoComplete="email" inputMode="email" spellCheck={false} required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@organisation.com" /></label>
                   <label>Topic
-                    <select value={form.topic} onChange={(e) => setForm({ ...form, topic: e.target.value })}>
+                    <select name="topic" autoComplete="off" value={form.topic} onChange={(e) => setForm({ ...form, topic: e.target.value })}>
                       {TOPICS.map((t) => <option key={t.key} value={t.key}>{t.label}</option>)}
                     </select>
                   </label>
-                  <label>How can we help?<textarea rows={4} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell us about your requirement…" /></label>
+                  <label>How can we help?<textarea name="message" rows={4} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell us about your requirement…" /></label>
                   <button type="submit" className="btn btn-signal btn-block">Send message <ArrowIcon /></button>
                 </form>
               )}
+              </div>
             </div>
           </Reveal>
         </div>

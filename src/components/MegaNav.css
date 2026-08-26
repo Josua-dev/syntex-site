@@ -218,15 +218,18 @@
 }
 .mobile-nav-inner{ max-width: 640px; margin: 0 auto; }
 .mm-group{ border-bottom: 1px solid var(--line); }
-.mm-group-head{ padding: 6px 0; }
+.mm-group-head{ display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; }
 .mm-group-link{
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  display: flex; align-items: center; flex: 1;
   padding: 16px 4px;
   font-family: var(--f-display); font-size: 20px; font-weight: 600; color: var(--blueprint);
 }
-.mm-arrow{ display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; color: var(--signal-deep); transition: transform .25s var(--ease); }
+.mm-arrow{
+  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+  color: var(--signal-deep); transition: transform .25s var(--ease);
+  background: none; border: none; cursor: pointer; flex: none;
+}
 .mm-arrow svg{ width: 16px; height: 16px; }
-.mm-group-link:has(.mm-arrow){ cursor: default; }
 .mm-sub{ overflow: hidden; }
 .mm-sub-group{ padding: 0 4px 12px; }
 .mm-sub-title{

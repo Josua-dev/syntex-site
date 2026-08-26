@@ -3,76 +3,51 @@ import { identity } from '../data/site'
 import './FindUsMap.css'
 
 // Embeds an OpenStreetMap view centered on the company head office.
-//
-// Geocoding strategy (tiered, so a map renders in almost every case without
-// ever baking a fabricated coordinate):
-//   1. Try the full verified address through Nominatim (public geocoder, no key).
-//   2. If that street match fails, retry the suburb "Klein Windhoek" — a much
-//      more reliably-indexed place from the verified address — so we still get
-//      a useful regional map rather than nothing.
-//   3. Regardless, the verified address text is always shown, and the last
-//      resort is an honest "view on OSM" search link.
-// Coordinate values always come from the geocoder's response, never hardcoded.
-// Nominatim's usage policy is respected: no API key, low volume, accept-language
-// unscrambled; we do not run an automated high-frequency loop.
+// The address is a verified value from the official public record; the
+// coordinates are resolved at runtime in the visitor's own browser via
+// Nominatim (free public geocoder, no API key), so no fixed coordinates
+// are baked into the code. If geocoding is unavailable the card falls
+// back to the verified address text with an honest "view on OSM" link.
+export default function FindUsMap() {
+  const [state, setState] = useState({ status: 'loading', embed: null, lat: null, lon: null, label: null })
 
-// Layer order of place-labels to try, most specific first. All are derived from
-// the verified `identity.hq` address — nothing invented.
-function candidateQueries() {
-  const full = [identity.hq.line1, identity.hq.line2, identity.hq.line3]
+  const address = [identity.hq.line1, identity.hq.line2, identity.hq.line3]
     .filter(Boolean)
     .join(', ')
-  const suburb = identity.hq.line2 // e.g. "Klein Windhoek, Windhoek"
-  const region = identity.hq.line3 // e.g. "Khomas Region, Namibia"
-  return [[full, true], [suburb, false], [region, false]]
-}
-
-async function geocode(q) {
-  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(q)}`
-  const res = await fetch(url, { headers: { 'Accept-Language': 'en' } })
-  if (!res.ok) throw new Error(`geocode ${res.status}`)
-  const rows = await res.json()
-  return rows && rows[0] ? rows[0] : null
-}
-
-export default function FindUsMap() {
-  const [state, setState] = useState({ status: 'loading', embed: null, label: null })
 
   useEffect(() => {
     let cancelled = false
-
-    async function load() {
-      // Walk through candidate queries (street -> suburb -> region) until one
-      // returns a geocoded match. Guarantees a map whenever any part of the
-      // verified address is indexable.
-      for (const [q, precise] of candidateQueries()) {
-        try {
-          const hit = await geocode(`${q}, Namibia`)
-          if (cancelled) return
-          if (hit) {
-            const lat = parseFloat(hit.lat)
-            const lon = parseFloat(hit.lon)
-            const bb = hit.boundingbox ? hit.boundingbox.map(parseFloat) : null
-            const bbox = bb
-              ? `?bbox=${bb[2]}%2C${bb[0]}%2C${bb[3]}%2C${bb[1]}`
-              : `?bbox=${lon - 0.004}%2C${lat - 0.003}%2C${lon + 0.004}%2C${lat + 0.003}`
-            setState({
-              status: 'ok',
-              embed: `https://www.openstreetmap.org/export/embed.html${bbox}&layer=mapnik&marker=${lat}%2C${lon}`,
-              label: precise ? hit.display_name : null,
-            })
-            return
-          }
-        } catch {
-          // Continue to the next, broader query; do not abort on one failure.
+    const q = encodeURIComponent(address + ', Namibia')
+    fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}`,
+      { headers: { 'Accept-Language': 'en' } }
+    )
+      .then((r) => r.json())
+      .then((rows) => {
+        if (cancelled) return
+        if (rows && rows[0]) {
+          const lat = parseFloat(rows[0].lat)
+          const lon = parseFloat(rows[0].lon)
+          const bbox = rows[0].boundingbox ? rows[0].boundingbox.map(parseFloat) : null
+          const bboxStr = bbox
+            ? `?bbox=${bbox[2]}%2C${bbox[0]}%2C${bbox[3]}%2C${bbox[1]}&layer=mapnik&marker=${lat}%2C${lon}`
+            : `?bbox=${lon - 0.004}%2C${lat - 0.003}%2C${lon + 0.004}%2C${lat + 0.003}&layer=mapnik&marker=${lat}%2C${lon}`
+          setState({
+            status: 'ok',
+            embed: `https://www.openstreetmap.org/export/embed.html${bboxStr}`,
+            lat,
+            lon,
+            label: rows[0].display_name,
+          })
+        } else {
+          setState({ status: 'notfound', embed: null, lat: null, lon: null, label: null })
         }
-      }
-      if (!cancelled) setState((s) => ({ ...s, status: 'unavailable' }))
-    }
-
-    load()
+      })
+      .catch(() => {
+        if (!cancelled) setState({ status: 'error', embed: null, lat: null, lon: null, label: null })
+      })
     return () => { cancelled = true }
-  }, [])
+  }, [address])
 
   return (
     <div className="findus">
@@ -91,24 +66,22 @@ export default function FindUsMap() {
         )}
         {state.status === 'ok' && (
           <iframe
-            title={`Map showing Syntex Technologies head office — ${state.label || 'Windhoek'}`}
+            title={`Map showing Syntex Technologies head office — ${address}`}
             src={state.embed}
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
           />
         )}
-        {(state.status === 'unavailable') && (
+        {(state.status === 'error' || state.status === 'notfound') && (
           <div className="findus-unavailable">
             <p>Map preview unavailable right now.</p>
             <a
-              href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(
-                [identity.hq.line1, identity.hq.line2, identity.hq.line3].filter(Boolean).join(', '),
-              )}`}
+              href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(address)}`}
               target="_blank"
               rel="noreferrer"
             >
-              View address on OpenStreetMap →
+              View {address} on OpenStreetMap →
             </a>
           </div>
         )}

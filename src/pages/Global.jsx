@@ -57,7 +57,6 @@ export default function Global() {
             <Unverified
               title="Country-level detail"
               body="The official record confirms that border control deployments span more than ten countries, but does not list the individual countries. This page deliberately does not name or map specific countries, so nothing is claimed beyond what the public source verifies."
-              verified={false}
             />
           </Reveal>
         </div>

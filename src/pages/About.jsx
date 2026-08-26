@@ -79,7 +79,7 @@ export default function About() {
                 {peopleLinks.map((l) => (
                   <Link to={l.to} className="link-tile" key={l.title}>
                     <div>
-                      <h3>{l.title}{l.verified === false && <span className="note-flag" style={{ marginLeft: 8, fontSize: 11 }}>Soon</span>}</h3>
+                      <h3>{l.title} {l.verified === false && <span className="note-flag" style={{ marginLeft: 8 }}>Soon</span>}</h3>
                       <p>{l.text}</p>
                     </div>
                     <span className="lt-footer"><span className="lt-tag">People</span> View →</span>

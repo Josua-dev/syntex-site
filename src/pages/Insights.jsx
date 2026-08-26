@@ -61,7 +61,7 @@ export default function Insights() {
                 </div>
                 <span className="ct-foot">
                   <span className="ct-tag">{c.tag}</span>
-                  {c.verified === false ? <span className="note-flag" style={{ fontSize: 9 }}>Soon</span> : null}
+                  {c.verified === false && <span className="note-flag" style={{ fontSize: 9 }}>Soon</span>}
                   <span className="sc-link">Open →</span>
                 </span>
               </Link>

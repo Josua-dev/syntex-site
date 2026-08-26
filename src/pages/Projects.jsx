@@ -85,7 +85,6 @@ export default function Projects() {
                   <span className="ct-foot">
                     <span className="ct-tag">{p.status}</span>
                     {p.verified === false && <span className="note-flag" style={{ fontSize: 9 }}>Draft</span>}
-                    {p.verified === true && <span className="checkmark" style={{ fontSize: 9, color: 'var(--signal)' }}>✓</span>}
                     <span className="sc-link">View →</span>
                   </span>
                 </Link>

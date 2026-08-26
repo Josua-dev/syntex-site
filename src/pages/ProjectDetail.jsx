@@ -16,15 +16,15 @@ export default function ProjectDetail() {
         <PageHeader
           crumbs={[{ label: 'Projects', path: '/projects' }, { label: 'Project' }]}
           eyebrow="Project"
-          title="This project record is part of the information architecture."
-          lead="This URL is part of the projects listing and will hold a verified record once confirmed against official sources."
+          title="This project record is still being drafted."
+          lead="The project you followed isn't in the verified content set yet."
         />
         <section className="block">
           <div className="wrap">
             <Reveal>
               <Unverified
-                title={`Project — "${slug}"`}
-                body="This URL is part of the information architecture and will hold a verified record once confirmed against official sources. No client names or statistics have been invented."
+                title={`Project record — "${slug}"`}
+                body="This URL is part of the projects information architecture, but doesn't yet hold a verified record. It will be filled from official sources when available — no client names or statistics have been invented."
               />
             </Reveal>
             <Reveal style={{ marginTop: 28 }}>
