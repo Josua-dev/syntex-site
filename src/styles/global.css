@@ -12,8 +12,8 @@
   --navy-10:    rgba(15,27,45,.08);
   --bronze:     #141414;
   --bronze-dark:#111111;
-  --orange:     #575554;   /* warm bronze-grey accent */
-  --orange-dark:#060606;
+  --orange:     #E8823C;   /* warm bronze-amber accent */
+  --orange-dark:#B5610F;
   --paper:      #FAFAF8;   /* warm off-white */
   --paper-dim:  #F2F0EA;
   --ink:        #1A1A1A;
@@ -25,7 +25,7 @@
   --line-on-dark: rgba(250,250,248,.16);
   --white:      #FFFFFF;
   --danger:     #A33A2A;
-  --shadow-bronze: 0 12px 28px -10px rgba(249,249,249,.45);
+  --shadow-bronze: 0 12px 28px -10px rgba(232,130,60,.45);
   --shadow-soft: 0 1px 2px rgba(15,27,45,.04), 0 8px 24px -12px rgba(15,27,45,.10);
 
   /* Back-compat aliases used across pages */
