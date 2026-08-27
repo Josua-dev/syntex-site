@@ -2,6 +2,7 @@
 
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import anime from 'animejs';
 import Layout from './Layout';
 
 import Home from './pages/Home'
